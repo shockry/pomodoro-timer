@@ -88,6 +88,9 @@
     var paused  = false
     var ticker;
 
+    var tick = new Audio('tick.wav');
+    tick.loop = true;
+
     var updateTimer = function() {
       //If the timer is paused, don't update anything
       //That's to prevent restarting the interval at pause otherwise
@@ -111,6 +114,7 @@
     };
 
     var startTicker = function() {
+      tick.play();
       ticker = window.setInterval(updateTimer, 1000);
     };
 
@@ -127,6 +131,7 @@
     }
 
     var resumeTicker = function() {
+      tick.play();
       paused = false;
     }
 
