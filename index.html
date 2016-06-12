@@ -5,168 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-  
-  <style type="text/css">
-    body {
-      background: url('restaurant.png');
-    }
-    #timer {
-      text-align: center;
-      font-size: 10em;
-      font-family: 'Montserrat', sans-serif;
-      box-shadow: 5px 5px 2px #888888;
-      border-radius: 3px;
-      position: relative;
-      width: 50%;
-      height: 50%;
-      display: inline-block;
-      background-color: #eee;
-      padding-top: 100px;
-      padding-bottom: 100px;
-    }
-
-    /*FIXME I'm almost sure that font resizing for screen size
-      can be done in a better way */
-
-    @media only screen and (max-width: 1165px) {
-      #timer {
-        font-size: 8em;
-      }
-    }
-
-    @media only screen and (max-width: 935px) {
-      #timer {
-        font-size: 6em;
-      }
-    }
-
-    @media only screen and (max-width: 705px) {
-      #timer {
-        font-size: 4em;
-      }
-    }
-
-    @media only screen and (max-width: 475px) {
-      #timer {
-        font-size: 2em;
-      }
-    }
-
-    .wrapper {
-      text-align: center;
-    }
-
-    #timer-wrapper {
-      margin-top: 10%;
-    }
-
-    #input-wrapper {
-      margin-bottom: 5px;
-    }
-
-    input {
-      padding: 0.5em;
-      border-radius: 4px;
-      box-shadow: inset 0 1px 3px #ddd;
-      border: 1px solid #ccc;
-      width: 60px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    /*buttons*/
-    .btn {
-      /* Structure */
-      display: inline-block;
-      zoom: 1;
-      line-height: normal;
-      white-space: nowrap;
-      vertical-align: middle;
-      text-align: center;
-      cursor: pointer;
-      -webkit-user-drag: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-
-    /* Firefox: Get rid of the inner focus border */
-    .btn::-moz-focus-inner {
-        padding: 0;
-        border: 0;
-    }
-
-    .btn {
-      font-family: inherit;
-      font-size: 100%;
-      padding: 0.5em 1em;
-      color: #444; /* rgba not supported (IE 8) */
-      border: 1px solid #999;  /*IE 6/7/8*/
-      border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
-      background-color: #E6E6E6;
-      text-decoration: none;
-      border-radius: 100px;
-    }
-
-    .btn-hover,
-    .btn:hover,
-    .btn:focus {
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
-        background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-        background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.10));
-        background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-        background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
-    }
-    .btn:focus {
-        outline: 0;
-    }
-    .btn-active,
-    .btn:active {
-        box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
-        border-color: #000\9;
-    }
-
-    .btn[disabled],
-    .btn-disabled,
-    .btn-disabled:hover,
-    .btn-disabled:focus,
-    .btn-disabled:active {
-        border: none;
-        background-image: none;
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-        filter: alpha(opacity=40);
-        -khtml-opacity: 0.40;
-        -moz-opacity: 0.40;
-        opacity: 0.40;
-        cursor: not-allowed;
-        box-shadow: none;
-    }
-
-    .btn-hidden {
-        display: none;
-    }
-
-    /* Firefox: Get rid of the inner focus border */
-    .btn::-moz-focus-inner{
-        padding: 0;
-        border: 0;
-    }
-
-    .btn-primary,
-    .btn-selected,
-    a.btn-primary,
-    a.btn-selected {
-        background-color: rgb(0, 120, 231);
-        color: #fff;
-    }
-
-
-  </style>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+    rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link href='css/main.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
   
@@ -174,7 +15,9 @@
     <div class="wrapper" id="input-wrapper" >
       <input type="number" max="99" id="txt-minutes" placeholder="Minutes">
       <button class="btn btn-primary" onclick="setTimer()">Set</button>
-      <button onclick="startTicker()" class="btn btn-primary"> <i class="fa fa-play" aria-hidden="true"></i></button>
+      <button class="btn btn-primary" title="Start" id="btn-start"> 
+        <i class="fa fa-play" aria-hidden="true"></i>
+      </button>
       <button onclick="pauseTicker()" class="btn btn-primary"><i class="fa fa-pause" aria-hidden="true"></i></button>
       <button onclick="resumeTicker()">Resume</button>
     </div>
@@ -191,7 +34,7 @@
     var paused  = false
     var ticker;
 
-    var tick = new Audio('smalltick.wav');
+    var tick = new Audio('audio/smalltick.wav');
     tick.loop = true;
 
     var updateTimer = function() {
@@ -219,6 +62,10 @@
     var startTicker = function() {
       tick.play();
       ticker = window.setInterval(updateTimer, 1000);
+
+      document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-pause");
+      document.querySelector("#btn-start").removeEventListener("click", startTicker);
+      document.querySelector("#btn-start").addEventListener("click", pauseTicker);
     };
 
     var setTimer = function() {
@@ -232,12 +79,18 @@
     var pauseTicker = function() {
       paused = true;
       tick.pause();
+
+      document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-play");
+      document.querySelector("#btn-start").removeEventListener("click", pauseTicker);
+      document.querySelector("#btn-start").addEventListener("click", startTicker);
     }
 
     var resumeTicker = function() {
       tick.play();
       paused = false;
     }
+
+    document.querySelector("#btn-start").addEventListener("click", startTicker);
 
   </script>
 </body>
