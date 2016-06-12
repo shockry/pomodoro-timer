@@ -2,6 +2,68 @@
 <html>
 <head>
   <title> Pomodoro timer </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  
+  <style type="text/css">
+    body {
+      background: url('restaurant.png');
+    }
+    #timer {
+      text-align: center;
+      font-size: 10em;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: 5px 5px 2px #888888;
+      border-radius: 3px;
+      position: relative;
+      width: 50%;
+      height: 50%;
+      display: inline-block;
+      background-color: #eee;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    /*FIXME I'm almost sure that font resizing for screen size
+      can be done in a better way */
+
+    @media only screen and (max-width: 1165px) {
+      #timer {
+        font-size: 8em;
+      }
+    }
+
+    @media only screen and (max-width: 935px) {
+      #timer {
+        font-size: 6em;
+      }
+    }
+
+    @media only screen and (max-width: 705px) {
+      #timer {
+        font-size: 4em;
+      }
+    }
+
+    @media only screen and (max-width: 475px) {
+      #timer {
+        font-size: 2em;
+      }
+    }
+
+    .wrapper {
+      text-align: center;
+    }
+
+    #timer-wrapper {
+      margin-top: 10%;
+    }
+
+    #input-wrapper {
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
   
