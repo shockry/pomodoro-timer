@@ -13,9 +13,12 @@
   
   <div id="timer-wrapper">
     <div class="wrapper" id="input-wrapper" >
-      <input type="number" max="99" id="txt-minutes" placeholder="Minutes">
-      <button class="btn btn-primary" onclick="setTimer()">Set</button>
-      <button class="btn btn-primary" title="Start" id="btn-start"> 
+      <div id="input-group">
+        <input type="number" max="99" id="txt-minutes" placeholder="Minutes" value=25>
+        <button class="btn btn-primary disable-on-tick" id="btn-set" onclick="setTimer()">Set</button>
+      </div>
+
+      <button class="btn btn-primary" id="btn-start"> 
         <i class="fa fa-play" aria-hidden="true"></i>
       </button>
     </div>
@@ -64,6 +67,12 @@
       document.querySelector("#btn-start").removeEventListener("click", startTicker);
       document.querySelector("#btn-start").addEventListener("click", pauseTicker);
 
+      var disableOnTick = document.querySelectorAll(".disable-on-tick");
+
+      for (var i = 0; i < disableOnTick.length; i++) {
+        disableOnTick[i].setAttribute("disabled", true);
+      }
+
       //If pause was clicked, release the flag, don't reset the interval
       if (paused) {
         paused = false;
@@ -87,6 +96,12 @@
       document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-play");
       document.querySelector("#btn-start").removeEventListener("click", pauseTicker);
       document.querySelector("#btn-start").addEventListener("click", startTicker);
+
+      var disableOnTick = document.querySelectorAll(".disable-on-tick");
+
+      for (var i = 0; i < disableOnTick.length; i++) {
+        disableOnTick[i].removeAttribute("disabled");
+      }
     }
 
     var resumeTicker = function() {
