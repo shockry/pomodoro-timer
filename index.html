@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Pomodoro timer </title>
+</head>
+<body>
+  
+  <div id="timer-wrapper">
+    <div class="wrapper" id="input-wrapper" >
+      <input type="number" id="txt-minutes" placeholder="Minutes">
+      <button onclick="setTimer()">Set</button>
+      <button onclick="startTicker()">Start</button>
+      <button onclick="pauseTicker()">Pause</button>
+      <button onclick="resumeTicker()">Resume</button>
+    </div>
+    <div class="wrapper">
+      <div id="timer">
+        <span id="minutes">25</span> : <span id="seconds">00</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var minutes = 25;
+    var seconds = 0;
+    var paused  = false
+    var ticker;
+
+    var updateTimer = function() {
+      //If the timer is paused, don't update anything
+      //That's to prevent restarting the interval at pause otherwise
+      if (paused) {
+        return;
+      }
+
+      //When seconds reach zero, start a new minute
+      if (seconds <= 0) {
+        seconds = 60;
+
+        //Add leading zeros to single-digit numbers
+        document.querySelector("#minutes").textContent = ('0' + --minutes).slice(-2);
+      }
+
+      document.querySelector("#seconds").textContent = ('0' + --seconds).slice(-2);
+
+      if (minutes <= 0 && seconds <= 0) {
+          window.clearInterval(ticker);
+      }
+    };
+
+    var startTicker = function() {
+      ticker = window.setInterval(updateTimer, 1000);
+    };
+
+    var setTimer = function() {
+      minutes = ('0' + document.querySelector("#txt-minutes").value).slice(-2);
+      seconds = '00';
+
+      document.querySelector("#minutes").textContent = minutes;
+      document.querySelector("#seconds").textContent = seconds;
+    }
+
+    var pauseTicker = function() {
+      paused = true;
+    }
+
+    var resumeTicker = function() {
+      paused = false;
+    }
+
+  </script>
+</body>
+</html>
