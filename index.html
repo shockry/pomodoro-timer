@@ -62,7 +62,7 @@
           ding.play();
           tick.pause();
           document.querySelector("#btn-start").setAttribute("disabled", true);
-          document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-play");
+          changeButton("play");
           document.querySelector("#btn-set").removeAttribute("disabled");
       }
     };
@@ -70,9 +70,8 @@
     var startTicker = function() {
 
       tick.play();
-      document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-pause");
-      document.querySelector("#btn-start").removeEventListener("click", startTicker);
-      document.querySelector("#btn-start").addEventListener("click", pauseTicker);
+      
+      changeButton("pause");
 
       var disableOnTick = document.querySelectorAll(".disable-on-tick");
 
@@ -102,9 +101,7 @@
       paused = true;
       tick.pause();
 
-      document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-play");
-      document.querySelector("#btn-start").removeEventListener("click", pauseTicker);
-      document.querySelector("#btn-start").addEventListener("click", startTicker);
+      changeButton("play");
 
       var disableOnTick = document.querySelectorAll(".disable-on-tick");
 
@@ -116,6 +113,18 @@
     var resumeTicker = function() {
       tick.play();
       paused = false;
+    }
+
+    var changeButton = function(mode) {
+      if (mode === "play") {
+        document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-play");
+        document.querySelector("#btn-start").removeEventListener("click", pauseTicker);
+        document.querySelector("#btn-start").addEventListener("click", startTicker);
+      } else {
+        document.querySelector("#btn-start").querySelector("i").setAttribute("class", "fa fa-pause");
+        document.querySelector("#btn-start").removeEventListener("click", startTicker);
+        document.querySelector("#btn-start").addEventListener("click", pauseTicker);
+      }
     }
 
     document.querySelector("#btn-start").addEventListener("click", startTicker);
