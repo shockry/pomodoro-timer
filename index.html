@@ -70,8 +70,11 @@
         if (!countingBreak) {
           setTimer(5);
           countingBreak = true;
+          document.querySelector("#timer").style.color = "green";
         } else {
           document.querySelector("#btn-start").setAttribute("disabled", true);
+          countingBreak = false;
+          document.querySelector("#timer").style.color = "black";
         }
 
       }
