@@ -14,6 +14,7 @@
   <div id="timer-wrapper">
     <div class="wrapper" id="input-wrapper" >
       <div id="input-group">
+        <input type="checkbox" id="chkMute" onclick="toggleAudio(this)"><label for="chkMute">Mute</label>
         <input type="number" max="99" id="txt-minutes" placeholder="Minutes" onclick="this.select()" value=25>
         <button class="btn btn-primary disable-on-tick" id="btn-set" onclick="setTimer()">Set</button>
       </div>
@@ -35,6 +36,7 @@
     var paused  = false
     var ticker; //The "setInterval" object
     var countingBreak = false; //Currently counting for a break or a task
+    var muted = false;
 
     var tick = new Audio('audio/smalltick.wav');
     tick.loop = true;
@@ -82,7 +84,9 @@
 
     var startTicker = function() {
 
-      tick.play();
+      if (!muted) {
+        tick.play();        
+      }
       
       changeButton("pause");
 
@@ -131,6 +135,25 @@
     var resumeTicker = function() {
       tick.play();
       paused = false;
+    }
+
+    //For the mute checkbox
+    var muteTicking = function() {
+      tick.pause();
+      tick.currentTime = 0;
+    }
+
+    var toggleAudio = function(checkbox) {
+      if (checkbox.checked) {
+        muteTicking();
+        muted = true;
+      } else {
+        //Only play audio if not in pause mode
+        if (!paused) {
+          tick.play();
+        }
+        muted = false;
+      }
     }
 
     var changeButton = function(mode) {
