@@ -33,7 +33,8 @@
     var minutes = 25;
     var seconds = 0;
     var paused  = false
-    var ticker;
+    var ticker; //The "setInterval" object
+    var countingBreak = false; //Currently counting for a break or a task
 
     var tick = new Audio('audio/smalltick.wav');
     tick.loop = true;
@@ -57,13 +58,22 @@
 
       document.querySelector("#seconds").textContent = ('0' + --seconds).slice(-2);
 
+      //Finished counting
       if (minutes <= 0 && seconds <= 0) {
-          window.clearInterval(ticker);
-          ding.play();
-          tick.pause();
+        window.clearInterval(ticker);
+        ding.play();
+        tick.pause();
+
+        changeButton("play");
+        document.querySelector("#btn-set").removeAttribute("disabled");
+
+        if (!countingBreak) {
+          setTimer(5);
+          countingBreak = true;
+        } else {
           document.querySelector("#btn-start").setAttribute("disabled", true);
-          changeButton("play");
-          document.querySelector("#btn-set").removeAttribute("disabled");
+        }
+
       }
     };
 
@@ -87,8 +97,13 @@
       }
     };
 
-    var setTimer = function() {
-      minutes = ('0' + document.querySelector("#txt-minutes").value).slice(-2);
+    var setTimer = function(minutesToSet) {
+      if (minutesToSet) {
+        minutes = ('0' + minutesToSet).slice(-2);
+      } else {
+        minutes = ('0' + document.querySelector("#txt-minutes").value).slice(-2);
+      }
+      
       seconds = '00';
 
       document.querySelector("#minutes").textContent = minutes;
