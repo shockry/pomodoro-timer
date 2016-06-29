@@ -5,8 +5,21 @@ var ticker; //The "setInterval" object
 var countingBreak = false; //Currently counting for a break or a task
 var muted = false;
 
-var tick = new Audio('audio/smalltick.wav');
-tick.loop = true;
+//Getting the "ticking" audio through the web audio API (fix for Safari looping gaps)
+var tickBuffer;
+var tick;
+var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+var request = new XMLHttpRequest();
+request.open('GET', 'audio/smalltick.wav');
+request.responseType = 'arraybuffer';
+request.onload = function() {
+  audioContext.decodeAudioData(request.response, function(buffer) {
+    tickBuffer = buffer;
+  }, function(e) {
+    console.log('Playback error! ', e);
+  });
+}
+request.send();
 
 var ding = new Audio('audio/ding.wav');
 
@@ -31,7 +44,7 @@ var updateTimer = function() {
   if (minutes <= 0 && seconds <= 0) {
     window.clearInterval(ticker);
     ding.play();
-    tick.pause();
+    tick.stop();
 
     changeButton("play");
     document.querySelector("#btn-set").removeAttribute("disabled");
@@ -49,10 +62,20 @@ var updateTimer = function() {
   }
 };
 
-var startTicker = function() {
+//Re-create the source node because it gets destroyed by calling stop() on it
+var playTick = function() {
+  tick = audioContext.createBufferSource();
+  tick.connect(audioContext.destination);
+  tick.buffer = tickBuffer;
+  tick.loop = true;
+  // //Adding a bit of a delay in the loop (because of the length of the audio clip)
+  tick.loopEnd = 0.5;
+  tick.start(0);
+}
 
+var startTicker = function() {
   if (!muted) {
-    tick.play();        
+    playTick();
   }
   
   changeButton("pause");
@@ -88,7 +111,7 @@ var setTimer = function(minutesToSet) {
 
 var pauseTicker = function() {
   paused = true;
-  tick.pause();
+  tick.stop()
 
   changeButton("play");
 
@@ -101,8 +124,7 @@ var pauseTicker = function() {
 
 //For the mute checkbox
 var muteTicking = function() {
-  tick.pause();
-  tick.currentTime = 0;
+  tick.stop()
 }
 
 var toggleAudio = function(checkbox) {
@@ -112,7 +134,7 @@ var toggleAudio = function(checkbox) {
   } else {
     //Only play audio if not in pause mode
     if (!paused) {
-      tick.play();
+      playTick();
     }
     muted = false;
   }
