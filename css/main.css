@@ -69,6 +69,14 @@ input[type="number"] {
   font-family: 'Montserrat', sans-serif;
 }
 
+#footer {
+  margin-top: 20pt;
+}
+
+#footer, #footer a {
+    color: #444;
+}
+
 /*buttons*/
 .btn {
   /* Structure */
